@@ -1,0 +1,145 @@
+{
+    "title": "Properties",
+    "slug": "properties",
+    
+    "tabs": [
+        {
+            "settings": {
+                "slug": "common",
+                "title": "General",
+                "subpage_slug": "properties"
+            },
+
+            "sections": [
+                {
+                    "settings": {"id": "common"},
+                    "options": [
+                        { "id": "disable_contract_type_label", "label": "Disable Contract Type Label", "type": "boolean", "default": false, "description": "If checked all properties in grid version will have disabled label with information about the contract type."}
+                    ]
+                }
+            ]
+        },
+        {
+            "settings": {
+                "slug": "homepage",
+                "title": "Properties Grid Template",
+                "subpage_slug": "properties"
+            },
+
+            "sections": [
+                {
+                    "settings": {"id": "homepage"},
+                    "options": [
+                        { "id": "title", "label": "Title", "type": "textinput", "default": "Recent Properties"},
+                        { "id": "rows", "label": "Of Rows", "type": "textinput", "default": "2"},
+                        { "id": "cols", "label": "Of Columns", "type": "textinput", "default": "3"},
+                        { "id": "hide_sidebar", "label": "Hide Sidebar", "type": "boolean", "default": false},
+                        { "id": "shuffle_results", "label": "Shuffle Results", "type": "boolean", "default": false},
+                        { "id": "type", "label": "Display type", "type": "select", "default": "recent", "choices": [
+                            {
+                                "key": "recent",
+                                "value": "Recent"
+                            },
+                            {
+                                "key": "reduced",
+                                "value": "Reduced"
+                            },
+                            {
+                                "key": "featured",
+                                "value": "Featured"
+                            }
+                        ]}
+                    ]
+                }
+            ]
+        },
+        {
+            "settings": {
+                "slug": "properties",
+                "title": "Archive Page",
+                "subpage_slug": "properties"
+            },
+
+            "sections": [
+                {
+                    "settings": {"id": "properties"},
+                    "options": [
+                        { "id": "per_page", "label": "Properties per page", "type": "textinput", "default": 9},
+                        { "id": "display_sort_bar", "label": "Display sort bar", "type": "boolean", "default": true},
+                        { "id": "type", "label": "Display type", "type": "select", "default": "grid", "choices": [
+                            {
+                                "key": "grid",
+                                "value": "Grid"
+                            },
+                            {
+                                "key": "row",
+                                "value": "Row"
+                            }
+                        ]}
+                    ]
+                }
+            ]
+        },
+        {
+            "settings": {
+                "slug": "filter",
+                "title": "Filter",
+                "subpage_slug": "properties"
+            },
+
+            "sections": [
+                {
+                    "settings": {"id": "filter"},
+                    "options": [
+                        { "id": "from", "label": "From", "type": "textarea", "default": "1000\n20000\n50000\n100000"},
+                        { "id": "to", "label": "To", "type": "textarea", "default": "1000\n20000\n50000\n100000"}
+                    ]
+                }
+            ]
+        },
+        {
+            "settings": {
+                "slug": "units",
+                "title": "Units",
+                "subpage_slug": "properties"
+            },
+
+            "sections": [
+                {
+                    "settings": {"id": "units"},
+                    "options": [
+                        { "id": "area", "label": "Area unit", "type": "textinput", "default": "m<sup>2</sup>"}
+                    ]
+                }
+            ]
+        },
+        {
+            "settings": {
+                "slug": "enquire_form",
+                "title": "Enquire Form",
+                "subpage_slug": "properties"
+            },
+
+            "sections": [
+                {
+                    "settings": {"id": "enquire_form", "title": "Header E-mail Information"},
+                    "options": [
+                        { "id": "name", "label": "From name", "type": "textinput", "default": "Realia"},
+                        { "id": "email", "label": "From email", "type": "textinput", "default": "info@example.com"},
+                        { "id": "subject", "label": "Subject", "type": "textinput", "default": "Message from enquire form"}
+                    ]
+                },
+                {
+                    "settings": {"id": "fields", "title": "Hide Form Fields"},
+                    "options": [
+                        { "id": "hide_name", "label": "Hide name", "type": "boolean", "default": false },
+                        { "id": "hide_phone", "label": "Hide phone", "type": "boolean", "default": false },
+                        { "id": "hide_date", "label": "Hide date", "type": "boolean", "default": false },
+                        { "id": "hide_email", "label": "Hide email", "type": "boolean", "default": false },
+                        { "id": "hide_message", "label": "Hide message", "type": "boolean", "default": false }
+                    ]
+                }
+            ]
+        }
+    ]
+}

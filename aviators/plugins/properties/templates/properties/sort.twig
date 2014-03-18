@@ -1,0 +1,72 @@
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('select[name=filter_sort_by]').change(function() {
+            $('form.form-sort').submit();
+        });
+
+        $('select[name=filter_order]').change(function() {
+			$('form.form-sort').submit();
+        });
+		$('select[name=filter_type]').change(function() {
+			$('form.form-sort').submit();
+        });        
+    });
+</script>
+
+<div class="properties-rows">
+    <div class="filter">
+        <form action="{{ wp.get_bloginfo('wpurl') }}/{{ wp.__('properties', 'aviators') }}/" method="get" class="form-sort form-horizontal">
+            {% if q %}
+                {% for key, value in q %}
+                    {% if key != 'filter_order' and key != 'filter_sort_by' %}
+                        {% if value is iterable %}
+                            {% for val in value %}
+                                <input type="hidden" name="{{ key }}[]" value="{{ val }}">
+                            {% endfor %}
+                        {% else %}
+                            <input type="hidden" name="{{ key }}" value="{{ value }}">
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+            <div class="control-group">
+                <label class="control-label" for="inputOrder">
+                    Sorting
+                </label>
+                <div class="controls">
+                    <select id="inputOrder" name="filter_order">
+                        <option value="ASC" {% if q.filter_order == 'ASC' %}selected="selected"{% endif %}>Low to High</option>
+                        <option value="DESC" {% if q.filter_order == 'DESC' %}selected="selected"{% endif %}>High to Low</option>
+                    </select>
+                </div><!-- /.controls -->
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label" for="filterOrder">
+                    Property Type
+                </label>
+                <div class="controls">
+                    <select id="filterOrder" name="filter_type">
+                        <option value="61" {% if q.filter_type == '61' %}selected="selected"{% endif %}>Vacant Land</option>
+                        <option value="68" {% if q.filter_type == '68' %}selected="selected"{% endif %}>--Acreages</option>
+												<option value="67" {% if q.filter_type == '67' %}selected="selected"{% endif %}>--Lots</option>
+												<option value="29" {% if q.filter_type == '29' %}selected="selected"{% endif %}>Residential</option>
+												<option value="26" {% if q.filter_type == '29' %}selected="selected"{% endif %}>--Single family</option>
+												<option value="63" {% if q.filter_type == '63' %}selected="selected"{% endif %}>--Single family on acreage</option>
+												<option value="64" {% if q.filter_type == '64' %}selected="selected"{% endif %}>--Strata</option>
+                        <option value="65" {% if q.filter_type == '65' %}selected="selected"{% endif %}>--Manufactured Home in Park</option>
+												<option value="66" {% if q.filter_type == '66' %}selected="selected"{% endif %}>--Recreational</option>
+												<option value="62" {% if q.filter_type == '62' %}selected="selected"{% endif %}>Commercial</option>
+												<option value="69" {% if q.filter_type == '69' %}selected="selected"{% endif %}>--Commercial Property</option>
+												<option value="70" {% if q.filter_type == '70' %}selected="selected"{% endif %}>--Business</option>
+												<option value="71" {% if q.filter_type == '71' %}selected="selected"{% endif %}>--Farm</option>
+												
+                    </select>
+                </div><!-- /.controls -->
+            </div>
+            <!-- /.control-group -->
+        </form>
+    </div><!-- /.filter -->
+</div><!-- /.properties-rows -->

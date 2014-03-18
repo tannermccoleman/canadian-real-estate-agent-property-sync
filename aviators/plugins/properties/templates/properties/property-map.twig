@@ -1,0 +1,82 @@
+{% if wp.get_post_meta(post.ID, '_property_latitude').0 and wp.get_post_meta(post.ID, '_property_longitude').0%}
+    <h2>{{ wp.__('Map', 'aviators') }}</h2>
+
+    <div id="property-map"></div>
+<script  type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"> </script>
+<script type="text/javascript">
+        var gTheMap;
+        var gMarker1;
+        var gMarker2;
+ 
+        $(document).ready(DocLoaded);
+ 
+        function DocLoaded()
+        {
+            // golf course coordinates
+            var StartLat = {{ wp.get_post_meta(post.ID, '_property_latitude').0 }};
+            var StartLng = {{ wp.get_post_meta(post.ID, '_property_longitude').0 }};
+ 
+            // what element to display the map in
+            var mapdiv = $("#property-map")[0];
+            
+            
+             // where on earth the map should display
+        var StartPoint = new  Microsoft.Maps.Location(StartLat, StartLng);
+ 
+        // create the map
+        gTheMap = new Microsoft.Maps.Map(mapdiv,
+            {
+                credentials: 'AuLN0Vu7kJA1ZgE1RRV2fW7GIULdaz4LBI7aDfn6_fR3AephiexRia4mscBHqkl-',
+                center: StartPoint,
+                zoom: 14,
+                mapTypeId: Microsoft.Maps.MapTypeId.aerial
+            });
+ 
+        // place two markers
+        marker1 = PlaceMarker(new Microsoft.Maps.Location(StartLat, StartLng));
+        marker2 = PlaceMarker(new Microsoft.Maps.Location(StartLat, StartLng - .0001));
+ 
+        DragEnd(null);
+    }
+    
+    // ---- PlaceMarker ------------------------------------
+ 
+function PlaceMarker(location)
+{
+    var marker = new Microsoft.Maps.Pushpin(location,
+    {
+        draggable : true
+    });
+    Microsoft.Maps.Events.addHandler(marker, 'dragend', DragEnd);
+    gTheMap.entities.push(marker);
+    return marker;
+}
+// ---- DragEnd -------------------------------------------
+ 
+var gLine = null;
+ 
+function DragEnd(Args)
+{
+   var Distance =  CalculateDistance(marker1._location, marker2._location);
+ 
+   $("#message").text(Distance.toFixed(1) + ' yards');
+ 
+    // draw a line connecting the points
+   var Endpoints = [marker1._location, marker2._location];      
+ 
+   if (gLine == null)
+   {
+       gLine = new Microsoft.Maps.Polyline(Endpoints, 
+           {
+               strokeColor: new Microsoft.Maps.Color(0xFF, 0xFF, 0xFF, 0),  // aRGB
+               strokeThickness : 2
+           });
+ 
+       gTheMap.entities.push(gLine);
+   }
+   else
+      gLine.setLocations(Endpoints);
+      
+ }
+    </script>
+   {% endif %}

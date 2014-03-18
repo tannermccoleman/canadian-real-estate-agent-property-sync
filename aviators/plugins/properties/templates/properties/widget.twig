@@ -1,0 +1,46 @@
+{{ before_widget|raw }}
+
+{% if title %}
+    {{ before_title|raw }}{{ title }}{{ after_title|raw }}
+{% endif %}
+
+<div class="content">
+    {% if properties %}
+        {% for property in properties %}
+            <div class="property">
+                <div class="image">
+                    <a href="{{ wp.get_permalink(property.ID) }}"></a>
+                    {% if wp.get_the_post_thumbnail(property.ID) %}
+                        {{ wp.get_the_post_thumbnail(property.ID)|raw }}
+                    {% else %}
+                        <img  src="{{ wp.get_template_directory_uri() }}/assets/img/property-tmp-small.png" alt="{{ property.post_title }}">
+                    {% endif %}
+                </div><!-- /.image -->
+
+                <div class="wrapper">
+                    <div class="title">
+                        <h3><a href="{{ wp.get_permalink(property.ID) }}">
+                            {% if property.meta._property_title.0 %}
+                                {{ property.meta._property_title.0 }}
+                            {% else %}
+                                {{ property.post_title }}
+                            {% endif %}
+                        </a></h3>
+                    </div><!-- /.title -->
+
+                    <div class="location">{{ property.location.0.name }}</div><!-- /.location -->
+
+                    <div class="price">
+                        {{ wp.aviators_price_format(property.meta._property_price.0) }}
+                    </div><!-- /.price -->
+                </div><!-- /.wrapper -->
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>
+            {{ wp.__('No featured properties found.', 'aviators') }}
+        </p>
+    {% endif %}
+</div><!-- /.content -->
+
+{{ after_widget|raw }}

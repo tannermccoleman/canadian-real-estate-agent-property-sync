@@ -1,0 +1,114 @@
+{% if title %}
+    {{ before_title|raw }}{{ title }}{{ after_title|raw }}
+{% endif %}
+
+<div class="property-filter widget">
+    <div class="content">
+        <form method="get" action="{{ wp.creasync_aviators_get_home_url() }}/{{ wp.__('properties', 'aviators') }}/">
+            <div class="location control-group">
+                <label class="control-label" for="inputLocation-{{ id }}">
+                    {{ wp.__('Location', 'aviators') }}
+                </label>
+                <div class="controls">
+                    <select name="filter_location" id="inputLocation-{{ id }}">
+                        <option value="">-</option>
+                        {% for location in wp.get_terms('locations') %}
+                            <option value="{{ location.term_id }}" {% if q.filter_location == location.term_id %}selected="selected"{% endif %}>{{ location.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="type control-group">
+                <label class="control-label" for="inputType-{{ id }}">
+                    {{ wp.__('Type', 'aviators') }}
+                </label>
+                <div class="controls">
+                    <select name="filter_type" id="inputType-{{ id }}">
+                        <option value="">-</option>
+                        {% for type in wp.get_terms('property_types') %}
+                            <option value="{{ type.term_id }}" {% if q.filter_type == type.term_id %}selected="selected"{% endif %}>{{ type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="beds control-group">
+                <label class="control-label" for="inputBeds-{{ id }}">
+                    {{ wp.__('Beds', 'aviators') }}
+                </label>
+                <div class="controls">
+                    <select name="filter_bedrooms" id="inputBeds-{{ id }}">
+                        <option value="">-</option>
+                        {% for i in range(1, 10) %}
+                            <option value="{{ i }}" {% if q.filter_bedrooms == i %}selected="selected="{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="baths control-group">
+                <label class="control-label" for="inputBaths-{{ id }}">
+                    {{ wp.__('Baths', 'aviators') }}
+                </label>
+                <div class="controls">
+                    <select name="filter_bathrooms" id="inputBaths-{{ id }}">
+                        <option value="">-</option>
+                        {% for i in range(1, 10) %}
+                            <option value="{{ i }}" {% if q.filter_bathrooms == i %}selected="selected="{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+
+            <div class="rent control-group">
+                <div class="controls">
+                    <label class="checkbox" for="inputRent-{{ id }}">
+                        <input type="checkbox" name="filter_contract_type[]" value="rent" id="inputRent-{{ id }}"{% for contract in q.filter_contract_type %}{% if contract == 'rent' %}checked="checked"{% endif %}{% endfor %}> {{ wp.__('Rent', 'aviators') }}
+                    </label>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="sale control-group">
+                <div class="controls">
+                    <label class="checkbox" for="inputSale-{{ id }}">
+                        <input type="checkbox" name="filter_contract_type[]" value="sale" id="inputSale-{{ id }}"{% for contract in q.filter_contract_type %}{% if contract == 'sale' %}checked="checked"{% endif %}{% endfor %}> {{ wp.__('Sale', 'aviators') }}
+                    </label>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="price-from control-group">
+                <label class="control-label" for="inputPriceFrom-{{ id }}">
+                    {{ wp.__('From', 'aviators') }}
+                </label>
+                <div class="controls">
+                    <select name="filter_price_from" id="inputPriceFrom-{{ id }}">
+                        <option value="">-</option>
+                        {% for i in price_from %}
+                            <option value="{{ i }}" {% if q.filter_price_from == i %}selected="selected"{% endif %}>{{ wp.aviators_price_format(i) }}</option>
+                        {% endfor %}
+                    </select>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="price-to control-group">
+                <label class="control-label" for="inputPriceTo-{{ id }}">
+                    {{ wp.__('To', 'aviators') }}
+                </label>
+                <div class="controls">
+                    <select name="filter_price_to" id="inputPriceTo-{{ id }}">
+                        <option value="">-</option>
+                        {% for i in price_to %}
+                            <option value="{{ i }}" {% if q.filter_price_to == i %}selected="selected"{% endif %}>{{ wp.aviators_price_format(i) }}</option>
+                        {% endfor %}
+                    </select>
+                </div><!-- /.controls -->
+            </div><!-- /.control-group -->
+
+            <div class="form-actions">
+                <button class="btn btn-primary btn-large">{{ wp.__('Search', 'aviators') }}</button>
+            </div><!-- /.form-actions -->
+        </form>
+    </div><!-- /.content -->
+</div><!-- /.property-filter -->

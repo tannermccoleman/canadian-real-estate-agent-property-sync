@@ -1,0 +1,17 @@
+<div class="content-box">
+	<div class="row">
+		{% if icon %}
+			<div class="icon span1">
+				<img src="{{ icon }}" alt="{{ title }}">
+			</div>
+		{% endif %}
+
+		<div class="content span{{ columns_for_content }}">
+			{% if title %}
+				<h3>{{ title }}</h3>
+			{% endif %}
+
+			{{ content }}
+		</div><!-- /.content -->
+	</div><!-- /.row -->
+</div><!-- /.content-box -->

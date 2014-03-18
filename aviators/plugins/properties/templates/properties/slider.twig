@@ -1,0 +1,26 @@
+{% if wp.get_post_meta(post.ID, '_property_slides', TRUE) %}
+    <div class="carousel property">
+        <div class="preview">
+            <a href="{{ wp.get_post_meta(post.ID, '_property_slides', TRUE).0.imgurl }}" class="fancybox">
+                <img src="{{ wp.get_post_meta(post.ID, '_property_slides', TRUE).0.imgurl }}" alt="">
+            </a>
+        </div><!-- /.preview -->
+
+        <div class="content">
+            <ul>
+                {% for slide in wp.get_post_meta(post.ID, '_property_slides', TRUE) %}
+                    {% if loop.first %}
+                        <li class="active">
+                    {% else %}
+                        <li>
+                    {% endif %}
+                        <img src="{{ slide.imgurl }}" alt="">
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <a id="carousel-prev" href="#">{{ wp.__('Previous', 'aviators') }}</a>
+            <a id="carousel-next" href="#">{{ wp.__('Next', 'aviators') }}</a>
+        </div><!-- /.content -->
+    </div><!-- /.carousel -->
+{% endif %}

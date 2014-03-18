@@ -1,0 +1,62 @@
+<div class="property span9">
+    <div class="row">
+        <div class="image span3">
+            <div class="content">
+                <a href="{{ wp.get_permalink(property.ID) }}"></a>
+                {% if wp.get_the_post_thumbnail(property.ID) %}
+                    {{ wp.get_the_post_thumbnail(property.ID)|raw }}
+                {% else %}
+                <img  src="{{ wp.get_template_directory_uri() }}/assets/img/property-tmp-small.png" alt="{{ property.post_title }}">
+                {% endif %}
+            </div><!-- /.content -->
+        </div><!-- /.image -->
+
+        <div class="body span6">
+            <div class="title-price row">
+                <div class="title span4">
+                    <h2><a href="{{ wp.get_permalink(property.ID) }}">{{ property.post_title }}</a></h2>
+                </div><!-- /.title -->
+
+                <div class="price">{{ wp.aviators_price_format(property.meta._property_price.0) }}</div><!-- /.price -->
+            </div><!-- /.title -->
+
+            <div class="location">{{ property.location.0.name }}</div><!-- /.location -->
+
+            <div class="body">
+
+{% if property.meta._property_overview.0 %}
+                <h4>Overview</h4>
+                <p>{{ property.meta._property_overview.0 }}</p>
+{% endif %}
+
+            </div><!-- /.body -->
+
+            <div class="info clearfix">
+                {% if property.meta._property_area.0 %}
+                    <div class="area">
+                        <span class="key">{{ wp.__('Area', 'aviators') }}:</span><!-- /.key -->
+                        <span class="value">{{ property.meta._property_area.0 }}{{ wp.aviators_settings_get_value('properties', 'units', 'area')|raw }}</span><!-- /.value -->
+                    </div><!-- /.area -->
+                {% endif %}
+
+                {% if property.meta._property_bedrooms.0 %}
+                    <div class="bedrooms" title="{{ wp.__('Bedrooms', 'aviators') }}"><div class="content">{{ property.meta._property_bedrooms.0 }}</div></div><!-- /.bedrooms -->
+                {% endif %}
+
+                {% if property.meta._property_bathrooms.0 %}
+                    <div class="bathrooms" title="{{ wp.__('Bathrooms', 'aviators') }}"><div class="content">{{ property.meta._property_bathrooms.0 }}</div></div><!-- /.bathrooms -->
+                {% endif %}
+<div style="float:right">
+{% if property.meta._property_agentname.0 %}
+                    <div style="float:left;padding-right:13px;color:#e63434;">{{ property.meta._property_agentname.0 }}</div><!-- /.agentname -->
+                {% endif %}
+{% if property.meta._property_reduced.0 %}
+<div style="float:left;padding:5px;color:#fff;background:#e63434;margin:-6px 6px 0 0">Sold</div><!-- /.sold-->
+{% endif %}
+
+</div>
+
+            </div><!-- /.info -->
+        </div><!-- /.body -->
+    </div><!-- /.row -->
+</div><!-- /.property -->
