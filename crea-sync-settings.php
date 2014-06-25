@@ -47,9 +47,9 @@ function creasync_query_vars($vars) {
 
 function creasync_api_settings() {
     global $creasync_version, $creasync_plugin_dir, $creasync_plugin_url;
-    define('PURPLE_XMLS_PATH', dirname(__FILE__));      // /.../wp-content/plugins/crea-sync
-    define('PURPLE_XMLS_NAME', basename(dirname(__FILE__)));   // crea-sync
-    define('PURPLE_XMLS_URL', plugins_url() . '/' . PURPLE_XMLS_NAME);
+    if (!defined('PURPLE_XMLS_PATH')) define('PURPLE_XMLS_PATH', dirname(__FILE__));      // /.../wp-content/plugins/crea-sync
+    if (!defined('PURPLE_XMLS_NAME')) define('PURPLE_XMLS_NAME', basename(dirname(__FILE__)));   // crea-sync
+    if (!defined('PURPLE_XMLS_URL')) define('PURPLE_XMLS_URL', plugins_url() . '/' . PURPLE_XMLS_NAME);
     $creasync_plugin_dir = WP_PLUGIN_DIR . '/' . str_replace(basename(__FILE__), "", plugin_basename(__FILE__));
     $creasync_plugin_url = plugins_url() . "/crea-sync/";
     $creasync_version = "1.0.2";
