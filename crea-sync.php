@@ -47,4 +47,4 @@ if (!wp_next_scheduled('crea_property_syncher')) {
 
 add_action('crea_property_syncher', 'crea_property_syncher_sync_all');
 
-register_deactivation_hook(__FILE__, creasync_deactivate);
+register_deactivation_hook(__FILE__, 'creasync_deactivate');
